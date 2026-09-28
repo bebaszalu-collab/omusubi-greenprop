@@ -1,0 +1,647 @@
+<title>おむすび@GREEN PROP｜本棚オーナー募集</title>
+<style>
+  :root {
+    --paper: #f3eedd;
+    --paper-alt: #eae2cb;
+    --rice: #fffbf1;
+    --ink: #26331f;
+    --ink-soft: #5c6650;
+    --moss: #3f6e4e;
+    --moss-deep: #2c4e37;
+    --ume: #b8492e;
+    --ume-soft: #d97a4e;
+    --nori: #1e2420;
+    --line: #d8cfae;
+    --shadow: 38, 46, 30;
+    --focus: #b8492e;
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #191d15;
+    --paper-alt: #21261a;
+    --rice: #262c1f;
+    --ink: #ece6d2;
+    --ink-soft: #b3b79f;
+    --moss: #7bab88;
+    --moss-deep: #93c29e;
+    --ume: #e2895f;
+    --ume-soft: #f0ac85;
+    --nori: #0f120f;
+    --line: #3a4130;
+    --shadow: 0, 0, 0;
+    --focus: #e2895f;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #191d15;
+      --paper-alt: #21261a;
+      --rice: #262c1f;
+      --ink: #ece6d2;
+      --ink-soft: #b3b79f;
+      --moss: #7bab88;
+      --moss-deep: #93c29e;
+      --ume: #e2895f;
+      --ume-soft: #f0ac85;
+      --nori: #0f120f;
+      --line: #3a4130;
+      --shadow: 0, 0, 0;
+      --focus: #e2895f;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    font-family: "游ゴシック体", "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow-x: hidden;
+    isolation: isolate;
+  }
+
+  .page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  h1, h2, h3 {
+    font-family: "游明朝体", "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: balance;
+    letter-spacing: 0.03em;
+  }
+
+  p { margin: 0; }
+  a { color: inherit; }
+  img, svg { display: block; max-width: 100%; }
+  button, .btn { font: inherit; letter-spacing: 0.05em; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+  .container {
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 56px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--moss-deep);
+    background: rgba(63, 110, 78, 0.12);
+    border: 1px solid rgba(63, 110, 78, 0.28);
+    padding: 5px 14px 5px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+  }
+  .eyebrow svg { width: 14px; height: 14px; flex: none; }
+
+  /* ---------- Header ---------- */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .site-header.is-scrolled { border-bottom-color: var(--line); box-shadow: 0 8px 24px -18px rgba(var(--shadow), 0.5); }
+
+  .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 14px; }
+
+  .logo { display: flex; align-items: center; gap: 10px; font-family: "游明朝体", "Yu Mincho", "Hiragino Mincho ProN", serif; font-weight: 700; font-size: 1.02rem; text-decoration: none; white-space: nowrap; line-height: 1.4; }
+  .logo .mark { width: 28px; height: 28px; flex: none; }
+  .logo .sub { font-size: 0.66rem; color: var(--ink-soft); font-weight: 500; letter-spacing: 0.02em; font-family: inherit; }
+
+  .site-nav { display: flex; align-items: center; gap: clamp(16px, 3vw, 28px); font-size: 0.88rem; }
+  .site-nav a { text-decoration: none; color: var(--ink-soft); }
+  .site-nav a:hover { color: var(--ink); }
+  .site-nav .nav-links { display: flex; gap: clamp(14px, 2.2vw, 22px); }
+  @media (max-width: 960px) { .site-nav .nav-links { display: none; } }
+
+  .btn-primary, .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 999px; font-weight: 700; font-size: 0.88rem; padding: 11px 22px;
+    border: 1px solid transparent; text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--ume); color: var(--rice); box-shadow: 0 10px 24px -12px rgba(184, 73, 46, 0.55); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 28px -12px rgba(184, 73, 46, 0.6); }
+  .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-secondary:hover { border-color: var(--moss); color: var(--moss-deep); }
+
+  /* ---------- Hero ---------- */
+
+  .hero { position: relative; z-index: 1; padding-block: clamp(52px, 8vw, 100px) clamp(60px, 8vw, 92px); }
+  .hero .container { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 6vw, 64px); align-items: center; }
+  @media (max-width: 860px) {
+    .hero .container { grid-template-columns: 1fr; }
+    .hero .hero-art { order: -1; max-width: 230px; margin-inline: auto; }
+  }
+
+  .hero h1 { font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.42; margin-block: 18px 20px; }
+  .hero h1 em { font-style: normal; color: var(--moss-deep); background: linear-gradient(transparent 68%, rgba(63, 110, 78, 0.22) 0); }
+  .hero .lede { font-size: 1rem; color: var(--ink-soft); max-width: 48ch; margin-bottom: 30px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 26px; }
+  .hero .meta-row { display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.8rem; color: var(--ink-soft); }
+  .hero .meta-row span { display: flex; align-items: center; gap: 6px; }
+  .hero .meta-row svg { width: 15px; height: 15px; color: var(--moss); flex: none; }
+
+  .hero-art { position: relative; }
+  .hero-art svg { width: 100%; height: auto; }
+
+  .eyecatch-photo { margin: 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: var(--rice); }
+  .eyecatch-photo img { width: 100%; height: auto; display: block; }
+  .eyecatch-photo figcaption { padding: 14px 22px; font-size: 0.82rem; color: var(--ink-soft); }
+
+  /* ---------- Section shell ---------- */
+
+  section { position: relative; z-index: 1; }
+  .band { padding-block: clamp(60px, 8vw, 96px); }
+  .band-alt { background: var(--paper-alt); border-block: 1px solid var(--line); }
+
+  .section-head { max-width: 62ch; margin-bottom: clamp(34px, 5vw, 52px); }
+  .section-head h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); margin-block: 14px 0; }
+  .section-head .lede { color: var(--ink-soft); margin-top: 14px; font-size: 0.96rem; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- Concept / thread (used by "どんな場所か") ---------- */
+
+  .concept-grid { display: grid; grid-template-columns: auto 1fr; gap: 0 28px; }
+  .thread { width: 40px; position: relative; }
+  .thread svg { position: sticky; top: 90px; height: calc(100% - 20px); }
+  .concept-nodes { display: flex; flex-direction: column; gap: clamp(34px, 6vw, 52px); }
+  .concept-node { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; }
+  .concept-node .dot { width: 44px; height: 44px; border-radius: 50%; background: var(--rice); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--moss-deep); font-family: "游明朝体", "Yu Mincho", serif; font-weight: 700; }
+  .concept-node h3 { font-size: 1.08rem; margin-bottom: 8px; }
+  .concept-node p { color: var(--ink-soft); font-size: 0.93rem; max-width: 54ch; }
+
+  /* ---------- Brand quote (想い) ---------- */
+
+  .brand-quote {
+    border-left: 3px solid var(--ume);
+    padding-left: clamp(18px, 3vw, 26px);
+    font-family: "游明朝体", "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: clamp(1.02rem, 1.7vw, 1.2rem);
+    line-height: 2.05;
+    color: var(--ink);
+    max-width: 68ch;
+  }
+  .brand-quote strong { color: var(--ume); font-weight: 700; }
+
+  /* ---------- Money / stat (本棚オーナーとは) ---------- */
+
+  .money-layout { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(28px, 5vw, 52px); align-items: center; }
+  @media (max-width: 780px) { .money-layout { grid-template-columns: 1fr; } }
+  .stat-card {
+    background: color-mix(in srgb, var(--ume) 12%, var(--rice));
+    border: 1px solid rgba(184, 73, 46, 0.28);
+    border-radius: 20px; padding: clamp(28px, 4vw, 40px) 28px; text-align: center;
+  }
+  .stat-number { font-family: "游明朝体", "Yu Mincho", serif; font-size: clamp(2.4rem, 5vw, 3.1rem); color: var(--ume); line-height: 1; }
+  .stat-label { margin-top: 12px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.6; }
+  .money-copy h3 { font-size: 1.1rem; margin-bottom: 12px; }
+  .money-copy p { color: var(--ink-soft); font-size: 0.94rem; }
+  .money-copy p + p { margin-top: 12px; }
+  .money-copy strong { color: var(--ink); }
+
+  /* ---------- Opening owner promo ---------- */
+
+  .promo-banner {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--ume) 14%, var(--rice)), var(--rice));
+    border: 1.5px solid var(--ume);
+    border-radius: 18px;
+    padding: clamp(22px, 4vw, 30px) 26px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .promo-badge {
+    display: inline-block; background: var(--ume); color: var(--rice);
+    font-size: 0.72rem; font-weight: 700; padding: 5px 16px; border-radius: 999px;
+    letter-spacing: 0.06em; margin-bottom: 16px;
+  }
+  .promo-price { display: flex; align-items: baseline; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .promo-original { color: var(--ink-soft); font-size: 1rem; text-decoration: line-through; text-align: center; }
+  .promo-original small { display: block; text-decoration: none; font-size: 0.7rem; margin-top: 2px; }
+  .promo-arrow { color: var(--ume); font-size: 1.3rem; }
+  .promo-new { font-family: "游明朝体", "Yu Mincho", serif; color: var(--ume); font-size: clamp(1.8rem, 4vw, 2.3rem); font-weight: 700; text-align: center; line-height: 1.2; }
+  .promo-new small { display: block; color: var(--ink-soft); font-size: 0.7rem; font-weight: 400; font-family: inherit; margin-top: 2px; }
+  .promo-deadline { margin-top: 16px; font-size: 0.86rem; color: var(--ink); font-weight: 700; }
+
+  /* ---------- Icon grid (reused for owner-feature cards) ---------- */
+
+  .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .icon-grid { grid-template-columns: 1fr; } }
+  .icon-card { background: var(--rice); border: 1px solid var(--line); border-radius: 18px; padding: 30px 24px; text-align: center; }
+  .icon-card .icon-circle { width: 46px; height: 46px; border-radius: 50%; background: rgba(63, 110, 78, 0.12); color: var(--moss-deep); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .icon-card .icon-circle svg { width: 22px; height: 22px; }
+  .icon-card h3 { font-size: 0.98rem; margin-bottom: 8px; }
+  .icon-card p { font-size: 0.87rem; color: var(--ink-soft); }
+
+  /* ---------- Numbered step list (reused for 参加の流れ) ---------- */
+
+  .roadmap-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 30px; position: relative; max-width: 74ch; }
+  .roadmap-list::before { content: ""; position: absolute; left: 19px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+  .roadmap-item { display: grid; grid-template-columns: 40px 1fr; gap: 18px; position: relative; }
+  .roadmap-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--rice); border: 1px solid var(--moss); color: var(--moss-deep); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; z-index: 1; }
+  .roadmap-body h3 { font-size: 1.02rem; margin-bottom: 4px; }
+  .roadmap-body p { color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* ---------- Access / place ---------- */
+
+  .access-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 52px); align-items: start; }
+  @media (max-width: 780px) { .access-layout { grid-template-columns: 1fr; } }
+  .access-info dl { display: flex; flex-direction: column; gap: 16px; margin: 0 0 20px; }
+  .access-info dt { font-size: 0.78rem; font-weight: 700; color: var(--moss-deep); letter-spacing: 0.04em; }
+  .access-info dd { margin: 4px 0 0; font-size: 0.94rem; }
+  .access-note { font-size: 0.8rem; color: var(--ink-soft); margin-top: 16px; }
+  .map-card { background: var(--rice); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .map-card .map-art { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .map-card .map-art img { width: 100%; height: auto; display: block; }
+  .map-card p { color: var(--ink-soft); font-size: 0.88rem; }
+
+  .schedule-card { border: 1px solid var(--line); border-radius: 16px; background: var(--rice); margin-top: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .schedule-card .calendar-label { font-size: 0.78rem; font-weight: 700; color: var(--moss-deep); letter-spacing: 0.04em; }
+  .schedule-card .btn-secondary { align-self: center; }
+
+  /* ---------- Final CTA ---------- */
+
+  .cta-final { background: var(--nori); color: var(--rice); padding-block: clamp(60px, 8vw, 96px); }
+  .cta-final .container { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 56px); align-items: start; }
+  @media (max-width: 900px) { .cta-final .container { grid-template-columns: 1fr; } }
+
+  .cta-final h2 { color: var(--rice); font-size: clamp(1.5rem, 2.8vw, 2.15rem); }
+  .cta-final .lede { color: rgba(255, 251, 241, 0.72); margin-top: 16px; max-width: 42ch; }
+  .cta-final .eyebrow { background: rgba(255, 251, 241, 0.12); border-color: rgba(255, 251, 241, 0.25); color: var(--ume-soft); }
+  .cta-final .highlight { color: var(--ume-soft); font-weight: 700; }
+
+  .cta-side { display: flex; flex-direction: column; gap: 20px; }
+
+  .join-form { background: rgba(255, 251, 241, 0.06); border: 1px solid rgba(255, 251, 241, 0.18); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .join-form h3 { color: var(--rice); font-size: 1.02rem; }
+  .join-form .form-note { color: rgba(255, 251, 241, 0.6); font-size: 0.82rem; }
+  .join-form .btn-primary { justify-content: center; margin-top: 4px; }
+
+  /* ---------- Footer ---------- */
+
+  .site-footer { padding-block: 40px; border-top: 1px solid var(--line); }
+  .site-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; font-size: 0.8rem; color: var(--ink-soft); }
+  .footer-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); }
+  .footer-brand svg { width: 18px; height: 18px; }
+  .footer-meta { display: flex; flex-direction: column; gap: 4px; }
+  .footer-meta a { color: var(--ink-soft); }
+  .footer-social { display: flex; gap: 14px; }
+  .footer-social a { color: var(--ink-soft); }
+  .footer-social a:hover { color: var(--moss-deep); }
+</style>
+
+<div class="page">
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a href="#hero" class="logo">
+        <svg class="mark" viewBox="0 0 200 190" aria-hidden="true">
+          <defs><clipPath id="oniClipNav"><path d="M100,20 Q115,20 122,35 L175,140 Q182,155 168,162 Q155,170 140,170 L60,170 Q45,170 32,162 Q18,155 25,140 L78,35 Q85,20 100,20 Z"/></clipPath></defs>
+          <path d="M100,20 Q115,20 122,35 L175,140 Q182,155 168,162 Q155,170 140,170 L60,170 Q45,170 32,162 Q18,155 25,140 L78,35 Q85,20 100,20 Z" fill="var(--rice)" stroke="var(--line)"/>
+          <rect x="0" y="122" width="200" height="60" clip-path="url(#oniClipNav)" fill="var(--nori)"/>
+          <circle cx="100" cy="92" r="8" fill="var(--ume)"/>
+        </svg>
+        <span>おむすび<span style="color:var(--ink-soft);font-weight:500;">@GREEN PROP</span><br><span class="sub">みんなの持続可能なライブラリー</span></span>
+      </a>
+      <nav class="site-nav">
+        <div class="nav-links">
+          <a href="#story">想い</a>
+          <a href="#what">どんな場所か</a>
+          <a href="#place">場所・基本情報</a>
+          <a href="#owner">本棚オーナー</a>
+          <a href="#flow">参加の流れ</a>
+        </div>
+        <a href="#join" class="btn-primary">オーナーに応募</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-copy">
+          <span class="eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 3l9 6.5V21H3z"/></svg>
+            GREEN PROP SUSTAINA BUILDING 1F
+          </span>
+          <h1>人と本の、<br><em>ご縁むすび。</em></h1>
+          <p class="lede">GREEN PROPの一角に、本棚を持ち寄ってつくる小さな私設図書館「おむすび@GREEN PROP」ができます。ひとつぶのお米が寄り集まるように、本棚オーナーひとりひとりの個性が集まって、結い(相互扶助)の心であたたかい場になります。</p>
+          <div class="actions">
+            <a href="#join" class="btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              本棚オーナーに応募する
+            </a>
+          </div>
+          <div class="meta-row">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9Z"/></svg>本棚オーナー会費 月額¥2,000</span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <svg viewBox="0 0 320 300" aria-hidden="true">
+            <defs><clipPath id="oniClipHero"><path d="M160,32 Q184,32 196,56 L280,224 Q292,248 268,260 Q248,272 224,272 L96,272 Q72,272 52,260 Q28,248 40,224 L124,56 Q136,32 160,32 Z"/></clipPath></defs>
+            <circle cx="248" cy="70" r="46" fill="var(--paper-alt)"/>
+            <circle cx="60" cy="230" r="30" fill="var(--paper-alt)"/>
+            <path d="M160,32 Q184,32 196,56 L280,224 Q292,248 268,260 Q248,272 224,272 L96,272 Q72,272 52,260 Q28,248 40,224 L124,56 Q136,32 160,32 Z" fill="var(--rice)" stroke="var(--line)" stroke-width="1.5"/>
+            <rect x="20" y="196" width="280" height="90" clip-path="url(#oniClipHero)" fill="var(--nori)"/>
+            <circle cx="160" cy="150" r="14" fill="var(--ume)"/>
+            <path d="M96 262c8-6 24-10 64-10s56 4 64 10" stroke="var(--paper)" stroke-width="2" fill="none" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="photo" style="padding-top:0;">
+      <div class="container">
+        <figure class="eyecatch-photo reveal">
+          <img src="__EYECATCH_IMG_PLACEHOLDER__" alt="GREEN PROP SUSTAINA BUILDING(東京都港区芝)の外観">
+          <figcaption>GREEN PROP SUSTAINA BUILDING — 「おむすび」の舞台となる1階部分</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band" id="story">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9Z"/></svg>想い</span>
+          <h2>名前に込めた、<wbr>ひとつの想い。</h2>
+        </div>
+        <p class="brand-quote reveal">
+          「おむすび」という名前には、本と人のご縁を結びたいという願いを込めました。結い（ゆい）の精神で、お互いができることを持ち寄り、助け合う。誰かの本という「具材」が集まり、新しい価値を生み出していく——それはまるでおむすびづくりのようです。作る人も味わう人も垣根なく、みんなでこの場所を一緒に育てていきます。
+        </p>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="what">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>どんな場所か</span>
+          <h2>書店でも図書館でもない、<wbr>ここだけの体験。</h2>
+        </div>
+
+        <div class="concept-grid">
+          <div class="thread" aria-hidden="true">
+            <svg viewBox="0 0 40 480" preserveAspectRatio="none" style="width:40px;">
+              <path id="threadPath" d="M20 0 C 6 80, 34 160, 20 240 C 6 320, 34 400, 20 480" fill="none" stroke="var(--moss)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="concept-nodes">
+            <div class="concept-node reveal">
+              <span class="dot">一</span>
+              <div>
+                <h3>「顔の見える」関係</h3>
+                <p>基本は紹介制とし、知人中心の集客から。無理に広げるのではなく、安心できる深いつながりを丁寧に育みます。</p>
+              </div>
+            </div>
+            <div class="concept-node reveal">
+              <span class="dot">二</span>
+              <div>
+                <h3>自己表現のメディア</h3>
+                <p>本棚は単なる貸出機ではありません。棚主の好きな本を通じて「自己紹介」する場です。本以外の好きなものを飾ることもできます。</p>
+              </div>
+            </div>
+            <div class="concept-node reveal">
+              <span class="dot">三</span>
+              <div>
+                <h3>主客一体の「1日店長」</h3>
+                <p>オーナーは「店番」ではなく、自分色を演出する「1日店長」。おもてなしする側・される側の境界線をなくし、みんなでつくるフラットな場を目指します。</p>
+              </div>
+            </div>
+            <div class="concept-node reveal">
+              <span class="dot">四</span>
+              <div>
+                <h3>非営利・純粋なイベント</h3>
+                <p>有料イベントや物販は行いません。オーナーや地域をつなぐための、純粋なキッカケとしての集いを大切にします。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="place">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9Z"/></svg>場所・基本情報</span>
+          <h2>GREEN PROP SUSTAINA BUILDING 1Fへ。</h2>
+        </div>
+        <div class="access-layout">
+          <div class="access-info reveal">
+            <dl>
+              <div><dt>所在地</dt><dd>〒108-0014 東京都港区芝4丁目13-12<br>GREEN PROP SUSTAINA BUILDING 1F</dd></div>
+              <div><dt>アクセス</dt><dd>JR田町駅より徒歩5分<br>都営浅草線・三田線 三田駅より徒歩2分</dd></div>
+              <div><dt>オープン目標</dt><dd>2026年10月上旬オープン予定</dd></div>
+              <div><dt>開館日・時間</dt><dd>平日10時〜17時、1日店長在籍時に開館予定。<br>詳細は開館スケジュールでご確認ください。</dd></div>
+            </dl>
+            <div class="schedule-card">
+              <div class="calendar-label">開館スケジュール</div>
+              <a class="btn-secondary" href="https://calendar.google.com/calendar/embed?src=228db6db006c9d44205dfd3464c77cf08693cdee1d7622f11991ed5d9eb30cf3%40group.calendar.google.com&ctz=Asia%2FTokyo" target="_blank" rel="noopener">Googleカレンダーで全て見る</a>
+            </div>
+          </div>
+          <div class="map-card reveal">
+            <div class="map-art" aria-hidden="true">
+              <img src="__MAP_IMG_PLACEHOLDER__" alt="GREEN PROP SUSTAINA BUILDING周辺地図(東京都港区芝4丁目)" width="100%">
+            </div>
+            <p>古材を活かしてリノベーションされたビルの1階が、「おむすび」の舞台になります。</p>
+            <a class="btn-secondary" href="https://maps.app.goo.gl/vbQPSRce6UzL2MzF9" target="_blank" rel="noopener">Googlemapで見る</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="owner">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>本棚オーナーとは?</span>
+          <h2>まずは、<wbr>ひと棚から。</h2>
+          <p class="lede">貸し棚ではなく、あなたの色を出せる関わり方。それが「本棚オーナー」です。</p>
+        </div>
+
+        <div class="promo-banner reveal">
+          <span class="promo-badge">オープニングオーナー特典</span>
+          <div class="promo-price">
+            <span class="promo-original">¥12,000<small>通常(月額¥2,000×6か月)</small></span>
+            <span class="promo-arrow">→</span>
+            <span class="promo-new">¥10,000<small>6か月一括払い</small></span>
+          </div>
+          <p class="promo-deadline">9月末までのお申込み限定・残り8名</p>
+        </div>
+
+        <div class="money-layout reveal">
+          <div class="stat-card">
+            <div class="stat-number">¥2,000</div>
+            <div class="stat-label">月額の本棚オーナー会費</div>
+          </div>
+          <div class="money-copy">
+            <h3>非営利・循環型のスタンス</h3>
+            <p>会費はビジネス目的の収入にはせず、改修費や運営費など、みんなが過ごすこの場の維持に充てられます。</p>
+            <p>まずは最初の6か月間を<strong>「実験期間」</strong>と位置づけ、無理なく続けられる形を探します。</p>
+          </div>
+        </div>
+        <div class="icon-grid reveal" style="margin-top:28px;">
+          <div class="icon-card">
+            <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></div>
+            <h3>棚デザインは自由</h3>
+            <p>本にとどまらず、好きなものや個人の作品を飾って個性を出せます。</p>
+          </div>
+          <div class="icon-card">
+            <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9Z"/></svg></div>
+            <h3>「1日店長」として関われる</h3>
+            <p>おもてなしする側・される側の境界なく、みんなでつくる場です。</p>
+          </div>
+          <div class="icon-card">
+            <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            <h3>最初の半年は実験期間</h3>
+            <p>走りながら、みんなで居心地の良い形を模索していきます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="flow">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>参加の流れ</span>
+          <h2>応募から、<wbr>利用スタートまで。</h2>
+        </div>
+        <ol class="roadmap-list reveal">
+          <li class="roadmap-item">
+            <span class="roadmap-dot">1</span>
+            <div class="roadmap-body"><h3>ご連絡</h3><p>紹介制のため、まずはお気軽にお問い合わせください。</p></div>
+          </li>
+          <li class="roadmap-item">
+            <span class="roadmap-dot">2</span>
+            <div class="roadmap-body"><h3>お申込み</h3><p>応募フォームより、お申込みください。</p></div>
+          </li>
+          <li class="roadmap-item">
+            <span class="roadmap-dot">3</span>
+            <div class="roadmap-body"><h3>お振込み</h3><p>月額¥2,000(本棚オーナー会費)をお振込みいただきます。</p></div>
+          </li>
+          <li class="roadmap-item">
+            <span class="roadmap-dot">4</span>
+            <div class="roadmap-body"><h3>入金確認のご連絡</h3><p>入金を確認後、こちらからご連絡します。</p></div>
+          </li>
+          <li class="roadmap-item">
+            <span class="roadmap-dot">5</span>
+            <div class="roadmap-body"><h3>棚番号・利用開始日のご案内</h3><p>あなたの棚番号と、利用開始日をお伝えします。</p></div>
+          </li>
+          <li class="roadmap-item">
+            <span class="roadmap-dot">6</span>
+            <div class="roadmap-body"><h3>利用規約のご確認・ご同意</h3><p>運営ルールをご確認いただき、同意をお願いします。</p></div>
+          </li>
+          <li class="roadmap-item">
+            <span class="roadmap-dot">7</span>
+            <div class="roadmap-body"><h3>利用スタート</h3><p>いよいよ「1日店長」デビューです。</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta-final" id="join">
+      <div class="container">
+        <div class="cta-copy">
+          <span class="eyebrow">GREEN PROP SUSTAINA BUILDING 1F</span>
+          <h2>「おむすび」で、<br>新しく、あたたかい循環を。</h2>
+          <p class="lede">みんなの笑顔と個性が集まる、居心地のよい場所を一緒につくっていきましょう！<br><span class="highlight">もうやりたい！という方は、優先的にご案内します。</span></p>
+        </div>
+        <div class="cta-side">
+          <div class="join-form">
+            <h3>本棚オーナーに応募する</h3>
+            <p class="form-note">基本は紹介制です。下記のGoogleフォームよりご連絡ください。折り返しご案内します。</p>
+            <a class="btn-primary" href="https://forms.gle/Dxhn6Bd4saGhVfDc8" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              Googleフォームで応募する
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <svg viewBox="0 0 200 190" aria-hidden="true"><path d="M100,20 Q115,20 122,35 L175,140 Q182,155 168,162 Q155,170 140,170 L60,170 Q45,170 32,162 Q18,155 25,140 L78,35 Q85,20 100,20 Z" fill="var(--moss)"/></svg>
+        おむすび@GREEN PROP
+      </div>
+      <div class="footer-meta">
+        <span>みんなの持続可能なライブラリー / GREEN PROP SUSTAINA BUILDING 1F</span>
+        <span>お問い合わせ：<a href="mailto:mintosyo.omusubi@gmail.com">mintosyo.omusubi@gmail.com</a></span>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    }, { passive: true });
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('in-view'); });
+    }
+
+    var threadPath = document.getElementById('threadPath');
+    if (threadPath) {
+      var len = threadPath.getTotalLength();
+      threadPath.style.strokeDasharray = len;
+      threadPath.style.strokeDashoffset = reduceMotion ? 0 : len;
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        var threadIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              threadPath.style.transition = 'stroke-dashoffset 1.6s ease';
+              threadPath.style.strokeDashoffset = '0';
+              threadIo.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        threadIo.observe(document.getElementById('what'));
+      }
+    }
+  })();
+</script>
